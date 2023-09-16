@@ -4,6 +4,7 @@ import com.example.propertymanagement.model.User;
 import com.example.propertymanagement.model.UserAuthenticationRequest;
 import com.example.propertymanagement.repository.UserRepository;
 import com.example.propertymanagement.service.AuthenticationService;
+import com.example.propertymanagement.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final UserRepository repository;
     private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;

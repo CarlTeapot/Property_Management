@@ -10,6 +10,8 @@ import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.List;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class UserRepositoryTests {
@@ -29,5 +31,35 @@ public class UserRepositoryTests {
 
         Assertions.assertThat(savedUser).isNotNull();
         Assertions.assertThat(savedUser.getId()).isGreaterThan(0);
+    }
+    @Test
+    public void userRepository_findUsersByEmailStartingWithZ() {
+        User user = User.builder()
+                .email("zura@gmail.com")
+                .budget((long) 50000)
+                .password("mishvelet")
+                .role(UserRole.ADMIN)
+                .build();
+        User user2 = User.builder()
+                .email("zaza@gmail.com")
+                .budget((long) 50000)
+                .password("mishvelet")
+                .role(UserRole.ADMIN)
+                .build();
+        User user3 = User.builder()
+                .email("nana@gmail.com")
+                .budget((long) 50000)
+                .password("mishvelet")
+                .role(UserRole.ADMIN)
+                .build();
+        userRepository.save(user);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        List<User> users = userRepository.findUsersByEmailStartingWith("z");
+
+        Assertions.assertThat(users).isNotNull();
+        Assertions.assertThat(users).isNotEmpty();
+        Assertions.assertThat(users.size()).isEqualTo(2);
     }
 }

@@ -73,4 +73,8 @@ public class UserController {
         userService.changeBudgetAsAdmin(email, budget);
 
     }
+    @GetMapping("get-users-starting-with/{letter}")
+    List<User> getUsersStartingWith(@PathVariable("letter") String letter) {
+        return userService.getUsersStartingWith(letter);
+    }
 }

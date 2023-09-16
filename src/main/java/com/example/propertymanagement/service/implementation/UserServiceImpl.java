@@ -177,7 +177,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 
     }
-
+    @Override
+    public List<User> getUsersStartingWith(String letter) {
+        List<User> users = userRepository.findUsersByEmailStartingWith(letter);
+        return users;
+    }
 
 }
 

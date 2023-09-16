@@ -40,5 +40,7 @@ public interface UserService {
      void changeBudget(@NonNull HttpServletRequest request, Long budget);
 
      void changeBudgetAsAdmin(String email,Long budget);
+
+     List<User> getUsersStartingWith(String letter);
 }
 
